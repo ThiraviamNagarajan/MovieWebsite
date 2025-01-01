@@ -196,7 +196,7 @@ const SignInPage: React.FC = () => {
           >
             Already Registered?
           </div>
-          <button type="submit"  onClick={() => navigate('/LoginPage')} style={buttonStyle}>
+          <button type="submit"  onClick={() => navigate('/')} style={buttonStyle}>
             Login in
           </button>
         </div>

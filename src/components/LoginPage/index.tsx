@@ -210,7 +210,7 @@ console.log(logindata,"logindata");
             }}>Don't have an account ?</div>
 <button
           type="submit"
-          onClick={handleSubmit}
+          onClick={()=>{navigate('/sign-in-page')}}
           style={{
             padding: '8px 15px',
             borderRadius: '4px',

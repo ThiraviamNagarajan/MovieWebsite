@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { PiFilmSlateFill } from "react-icons/pi";
 import MovieDetails from "../MovieDetails";
-import { PiFilmReelBold, PiFilmSlateFill } from "react-icons/pi";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);

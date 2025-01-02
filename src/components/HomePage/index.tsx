@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { PiFilmSlateFill } from "react-icons/pi";
 import MovieDetails from "../MovieDetails";
 import Spinner from "../Common/Spinner";
+import "./index.css"
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -110,15 +111,8 @@ const HomePage = () => {
                 Here is the list of movies for you!
               </div>
               <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  color: "var(--secondary-color)",
-                  flexWrap: "wrap",
-                  gap: "25px",
-                  maxHeight:'450px',
-                  overflow:'auto'
-                }}
+              className="moviesCard"
+               
               >
                 {movies.map((movie: any) => (
                   <MovieDetails key={movie.id} movie={movie} />

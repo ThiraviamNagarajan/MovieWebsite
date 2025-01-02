@@ -1,5 +1,6 @@
 import React from "react";
 import MovieModal from "../Moviemodal";
+import "./index.css"
 
 const MovieDetails = ({ movie }: any) => {
   const [open, setOpen] = React.useState(false);
@@ -30,20 +31,22 @@ const MovieDetails = ({ movie }: any) => {
   return (
     <>
       <div
-        style={{
-          padding: "15px",
-          color: "var(--primary-color)",
-          backgroundColor: "var(--secondary-color)",
-          borderRadius: "6px",
-          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-          width: "27%",
-          cursor: "pointer",
-        }}
+       className="card_movie"
+        // style={{
+        //   padding: "15px",
+        //   color: "var(--primary-color)",
+        //   backgroundColor: "var(--secondary-color)",
+        //   borderRadius: "6px",
+        //   boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+        //   width: "27%",
+        //   cursor: "pointer",
+        // }}
         onClick={() => {
           setOpen(!open);
         }}
       >
         <div
+       
           style={{
             width: "100%",
             height: "135px",

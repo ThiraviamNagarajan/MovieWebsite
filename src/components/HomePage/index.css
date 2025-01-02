@@ -1,0 +1,23 @@
+
+.moviesCard
+{
+        display: flex;
+        justify-content: space-between;
+        color: var(--secondary-color);
+        flex-wrap: wrap;
+        gap: 25px;
+        flex-direction: row;
+        max-height: 450px;
+        overflow: auto; 
+        max-width: 1200px !important;
+}
+
+@media (max-width: 768px) {
+    .moviesCard
+    {
+        /* display: flex !important; */
+        flex-direction: column !important;
+        gap: 10px !important;
+        max-width: 300px !important;
+    }
+}

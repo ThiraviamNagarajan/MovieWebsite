@@ -64,7 +64,6 @@ const HomePage = () => {
               color: "white",
               borderBottomLeftRadius: "8px",
               borderBottomRightRadius: "8px",
-              // width: "100%",
             }}
             className="navbar"
           >
@@ -115,7 +114,6 @@ const HomePage = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   color: "var(--secondary-color)",
-                  // marginBottom: "-50px",
                   flexWrap: "wrap",
                   gap: "25px",
                   maxHeight:'450px',

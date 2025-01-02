@@ -3,7 +3,6 @@ import MovieModal from "../Moviemodal";
 
 const MovieDetails = ({ movie }: any) => {
   const [open, setOpen] = React.useState(false);
-console.log(movie, "movie");
 
   function formatDateString(dateString: any) {
     const months = [
@@ -47,7 +46,7 @@ console.log(movie, "movie");
         <div
           style={{
             width: "100%",
-            height: "130px",
+            height: "135px",
             borderRadius: "6px",
             overflow: "hidden",
           }}

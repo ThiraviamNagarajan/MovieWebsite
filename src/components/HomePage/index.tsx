@@ -65,13 +65,15 @@ const HomePage = () => {
               color: "white",
               borderBottomLeftRadius: "8px",
               borderBottomRightRadius: "8px",
+              flexWrap:"wrap",
+              gap:"20px"
             }}
             className="navbar"
           >
             <div>
               <PiFilmSlateFill size={40} />
             </div>
-            <div style={{marginLeft:"60px"}}>Welcome to MovieBuff</div>
+            <div >Welcome to MovieBuff</div>
             <div>
               <input
                 type="text"

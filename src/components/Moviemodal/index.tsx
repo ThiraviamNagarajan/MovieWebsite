@@ -102,7 +102,7 @@ export default function MovieModal({
         </Typography>
         <Typography
           id="modal-modal-description"
-          sx={{ mt: 2, color: "#ffffff" }}
+          sx={{ mt: 2, color: "#ffffff",fontSize:'13px',fontFamily:"inter" }}
         >
           {data?.overview}
         </Typography>

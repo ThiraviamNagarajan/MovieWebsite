@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 const LoginInPage: React.FC = () => {
-
-    const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const [logindata, setLogindata] = useState<{
     email: string;
@@ -23,10 +22,17 @@ const LoginInPage: React.FC = () => {
 
   const [storedData, setStoredData] = useState<any[]>([]);
 
+
   useEffect(() => {
     const storedFormData = localStorage.getItem('users');
     if (storedFormData) {
-      setStoredData([JSON.parse(storedFormData)]);
+      try {
+        const parsedData = JSON.parse(storedFormData);
+        setStoredData(Array.isArray(parsedData) ? parsedData : [parsedData]);
+      } catch (error) {
+        console.error('Error parsing stored data:', error);
+        setStoredData([]);
+      }
     }
   }, []);
 
@@ -70,22 +76,19 @@ const LoginInPage: React.FC = () => {
       setErrors(validationErrors);
       return;
     }
-console.log(storedData,"storedData");
-console.log(logindata,"logindata");
-
 
     const matchedUser = storedData.find(
       (user) =>
-        user.email === logindata.email && user.password === logindata.password
+        user.email.toLowerCase() === logindata.email.toLowerCase() &&
+        user.password === logindata.password
     );
-
-    console.log(matchedUser,"matchedUser");
-    
 
     if (matchedUser) {
       console.log('Login successful');
       alert('Login Successful');
-        navigate('/LandingPage')
+      setLogindata({email:'',password:''})
+
+      navigate('/LandingPage');
     } else {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -96,6 +99,7 @@ console.log(logindata,"logindata");
   };
 
   return (
+    <>
     <div
       style={{
         display: 'flex',
@@ -103,9 +107,12 @@ console.log(logindata,"logindata");
         alignItems: 'center',
         height: '100vh',
         width: '100%',
-        backgroundColor: 'var(--tertiary-color)',
+        backgroundColor: '#f2f0e9',
+        boxShadow:"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
       }}
     >
+      <div>
+      <div style={{color:"black",textAlign:"center",marginBottom:'5px'}}>Welcome to MovieBuff</div>
       <div
         style={{
           display: 'flex',
@@ -119,7 +126,7 @@ console.log(logindata,"logindata");
           padding: '50px',
         }}
       >
-        <div style={{ color: '#ffffff', fontSize: '20px' }}>Login</div>
+        <div style={{ color: 'black', fontSize: '20px',fontWeight:'600' }}>Login</div>
         <div>
           <input
             type="text"
@@ -132,7 +139,7 @@ console.log(logindata,"logindata");
               borderRadius: '5px',
               border: '1px solid #ccc',
               fontSize: '14px',
-              backgroundColor: 'white',
+              backgroundColor:"white",
               outline: 'none',
             }}
           />
@@ -178,55 +185,48 @@ console.log(logindata,"logindata");
             </div>
           )}
         </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '10px',
-          }}>
+        <div style={{display:"flex",flexDirection:"column",gap:"5px",width:"100%"}}>
         <button
           type="submit"
           onClick={handleSubmit}
           style={{
             padding: '8px 15px',
-            borderRadius: '4px',
+            borderRadius: '6px',
             border: 'none',
             cursor: 'pointer',
             backgroundColor: 'var(--tertiary-color)',
             color: 'white',
-            fontSize: '14px',
+            fontSize: '12px',
             fontWeight: '500',
+            width: '100%',
           }}
         >
           Login
         </button>
-<div>or</div>
-<div  style={{
-              color: 'white',
-              fontSize: '12px',
-              fontWeight: '500',
-              cursor: 'pointer',
-            }}>Don't have an account ?</div>
-<button
+        <div style={{color:"black",textAlign:"center",fontSize:"10px"}}>or</div>
+        <div style={{color:"black",textAlign:"center",fontSize:"11px"}}>Don't have an account? Please signin</div>
+        <button
           type="submit"
           onClick={()=>{navigate('/sign-in-page')}}
           style={{
             padding: '8px 15px',
-            borderRadius: '4px',
+            borderRadius: '6px',
             border: 'none',
             cursor: 'pointer',
             backgroundColor: 'var(--tertiary-color)',
             color: 'white',
-            fontSize: '14px',
+            fontSize: '12px',
             fontWeight: '500',
+            width: '100%',
           }}
         >
-          Sign in</button>
-          
+          Sign in
+        </button>
         </div>
       </div>
+      </div>
     </div>
+    </>
   );
 };
 

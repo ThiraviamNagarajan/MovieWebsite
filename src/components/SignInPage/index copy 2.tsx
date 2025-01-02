@@ -23,14 +23,8 @@ const SignUpPage: React.FC = () => {
 
   useEffect(() => {
     const savedUsers = localStorage.getItem('users');
-    try {
-      const parsedUsers = savedUsers ? JSON.parse(savedUsers) : [];
-      if (Array.isArray(parsedUsers)) {
-        setUsers(parsedUsers);
-      }
-    } catch (error) {
-      console.error('Failed to parse users from localStorage:', error);
-      setUsers([]);
+    if (savedUsers) {
+      setUsers(JSON.parse(savedUsers));
     }
   }, []);
 
@@ -56,6 +50,7 @@ const SignUpPage: React.FC = () => {
       [name]: value,
     }));
 
+    // Clear error when user starts typing
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: '',
@@ -73,6 +68,7 @@ const SignUpPage: React.FC = () => {
       confirmPassword: '',
     };
 
+    // Validate all fields
     if (!formData.name.trim()) {
       validationErrors.name = 'Name is required.';
     }
@@ -104,11 +100,12 @@ const SignUpPage: React.FC = () => {
       validationErrors.confirmPassword = 'Passwords do not match.';
     }
 
-    if (Object.values(validationErrors).some((error) => error)) {
+    if (Object.values(validationErrors).some(error => error)) {
       setErrors(validationErrors);
       return;
     }
 
+    // If validation passes, save user
     const newUser = {
       name: formData.name.trim(),
       email: formData.email.trim(),
@@ -120,10 +117,9 @@ const SignUpPage: React.FC = () => {
     setUsers(updatedUsers);
     localStorage.setItem('users', JSON.stringify(updatedUsers));
 
-    navigate('/');
+    // Redirect to login page after successful signup
+    navigate('/login');
   };
-
-  console.log(users, 'users');
 
   return (
     <div
@@ -136,7 +132,7 @@ const SignUpPage: React.FC = () => {
         backgroundColor: '#f2f0e9',
       }}
     >
-      <div
+      <form
         onSubmit={handleSubmit}
         style={{
           display: 'flex',
@@ -146,74 +142,62 @@ const SignUpPage: React.FC = () => {
           borderRadius: '10px',
           backgroundColor: 'var(--secondary-color)',
           boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-          gap: '20px',
-          padding: '50px 65px 50px 50px',
+          gap: '15px',
+          padding: '50px',
         }}
       >
         <div style={{ color: 'black', fontSize: '20px' }}>Sign Up</div>
-        
-        <div style={{ width: '100%', position: 'relative' }}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter your name"
-            value={formData.name}
-            onChange={handleChange}
-            style={inputStyle}
-          />
-          {errors.name && <div style={errorStyle}>{errors.name}</div>}
-        </div>
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter your name"
+          value={formData.name}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+        {errors.name && <div style={errorStyle}>{errors.name}</div>}
 
-        <div style={{ width: '100%', position: 'relative' }}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleChange}
-            style={inputStyle}
-          />
-          {errors.email && <div style={errorStyle}>{errors.email}</div>}
-        </div>
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          value={formData.email}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+        {errors.email && <div style={errorStyle}>{errors.email}</div>}
 
-        <div style={{ width: '100%', position: 'relative' }}>
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Enter your phone number"
-            value={formData.phone}
-            onChange={handleChange}
-            style={inputStyle}
-          />
-          {errors.phone && <div style={errorStyle}>{errors.phone}</div>}
-        </div>
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Enter your phone number"
+          value={formData.phone}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+        {errors.phone && <div style={errorStyle}>{errors.phone}</div>}
 
-        <div style={{ width: '100%', position: 'relative' }}>
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-            value={formData.password}
-            onChange={handleChange}
-            style={inputStyle}
-          />
-          {errors.password && <div style={errorStyle}>{errors.password}</div>}
-        </div>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+          value={formData.password}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+        {errors.password && <div style={errorStyle}>{errors.password}</div>}
 
-        <div style={{ width: '100%', position: 'relative' }}>
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Re-enter your password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            style={inputStyle}
-          />
-          {errors.confirmPassword && (
-            <div style={errorStyle}>{errors.confirmPassword}</div>
-          )}
-        </div>
-
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Re-enter your password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+        {errors.confirmPassword && (
+          <div style={errorStyle}>{errors.confirmPassword}</div>
+        )}
         <div
           style={{
             display: 'flex',
@@ -222,11 +206,9 @@ const SignUpPage: React.FC = () => {
             justifyContent: 'space-between',
             width: '100%',
             gap: '10px',
-            marginTop:"10px"
           }}
         >
-          <button type="submit" style={buttonStyle}
-          onClick={handleSubmit}>
+          <button type="submit" style={buttonStyle}>
             Sign Up
           </button>
           <div style={{ color: 'black' }}> or </div>
@@ -242,13 +224,13 @@ const SignUpPage: React.FC = () => {
           </div>
           <button
             type="button"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/login')}
             style={buttonStyle}
           >
             Log in
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
@@ -263,13 +245,10 @@ const inputStyle = {
   width: '100%',
 };
 
-const errorStyle:any = {
+const errorStyle = {
   color: 'red',
   fontSize: '10px',
   fontWeight: '500',
-  position: 'absolute',
-  left: '0',
-  marginTop: '5px',
 };
 
 const buttonStyle = {

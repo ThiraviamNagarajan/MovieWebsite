@@ -47,7 +47,7 @@ console.log(movie, "movie");
         <div
           style={{
             width: "100%",
-            height: "150px",
+            height: "130px",
             borderRadius: "6px",
             overflow: "hidden",
           }}
@@ -62,7 +62,7 @@ console.log(movie, "movie");
             marginTop: "10px",
           }}
         >
-          <div style={{ fontSize: "12px", fontWeight: "500", width: "75%" }}>
+          <div style={{ fontSize: "14px", fontWeight: "500", width: "75%" }}>
             {movie.original_title}
           </div>
           <div
@@ -73,8 +73,8 @@ console.log(movie, "movie");
               gap: "5px",
             }}
           >
-            <div>Streamed on</div>
-            <div style={{ color: "black" }}>
+            <div>Released on</div>
+            <div>
               {formatDateString(movie.first_aired)}
             </div>
           </div>

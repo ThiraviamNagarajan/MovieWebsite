@@ -5,16 +5,20 @@ const style = {
   top: "55%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
-  maxHeight: "70vh",
+  width: "40%", 
+  maxHeight: "70%",
   bgcolor: "var(--tertiary-color)",
   boxShadow: 24,
   p: 4,
   overflowY: "auto",
   "&:focus": {
     outline: "none"
+  },
+  "@media (max-width: 600px)": { 
+    width: "70%" 
   }
 };
+
 
 export default function MovieModal({
   open,
@@ -104,7 +108,7 @@ export default function MovieModal({
           id="modal-modal-description"
           sx={{ mt: 2, color: "#ffffff",fontSize:'13px',fontFamily:"inter" }}
         >
-          
+
           {data?.overview}
         </Typography>
       </Box>
